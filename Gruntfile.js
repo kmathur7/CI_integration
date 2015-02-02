@@ -29,6 +29,31 @@ module.exports = function(grunt) {
           //reporter: require('checkstyle')
       },
       all: ['Gruntfile.js', 'src/*.js']
+  },
+  csslint: {
+    strict: {
+      options: {
+        import: 2
+      },
+      src: ['styles/**/*.css']
+    },
+    lax: {
+      options: {
+        import: false
+      },
+      src: ['styles/**/*.css']
+    }
+  },
+  cssmin: {
+    target: {
+      files: [{
+        expand: true,
+        cwd: 'styles/css',
+        src: ['*.css', '!*.min.css'],
+        dest: 'build/css'
+        
+      }]
+    }
   }
   });
 
@@ -36,6 +61,8 @@ module.exports = function(grunt) {
  require('load-grunt-tasks')(grunt);
 
   // Default task(s).
-  grunt.registerTask('default', ['jshint','uglify']);
+  grunt.registerTask('default', ['jshint','uglify','csslint','cssmin']);
+  grunt.registerTask('validate', ['jshint','csslint']);
+  
 
 };
