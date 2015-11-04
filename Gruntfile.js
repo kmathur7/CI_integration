@@ -54,7 +54,12 @@ module.exports = function(grunt) {
         
       }]
     }
+  },
+  karma: {
+  unit: {
+    configFile: 'my.conf.js'
   }
+}
   });
 
   // Load the plugin that provides the "uglify" task.
@@ -63,6 +68,7 @@ module.exports = function(grunt) {
   // Default task(s).
   grunt.registerTask('default', ['jshint','uglify','csslint','cssmin']);
   grunt.registerTask('validate', ['jshint','csslint']);
+  grunt.registerTask('test', ['karma']);
   
 
 };
